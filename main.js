@@ -12,6 +12,21 @@ ctx.lineWidth = 5;
 
 let draw = false;
 
+let clrs = document.querySelectorAll(".clr");
+clrs = Array.from(clrs);
+
+clrs.forEach(clr => {
+    clr.addEventListener("click", () => {
+        ctx.strokeStyle = clr.dataset.clr;
+        });
+    });
+
+let clearBtn = document.querySelector(".clear");
+clearBtn.addEventListener("click", () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+})
+
+
 window.addEventListener("mousedown", (e) => draw = true);
 window.addEventListener("mouseup", (e) => draw = false);
 
