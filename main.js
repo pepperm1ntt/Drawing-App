@@ -4,7 +4,33 @@ canvas.width = window.innerWidth;
 
 const ctx = canvas.getContext("2d");
 
-ctx.fillStyle = "red";
-ctx.fillRect(100, 100, 100, 100);
 
-test
+let prevX = null;
+let prevY = null;
+
+ctx.lineWidth = 5;
+
+let draw = false;
+
+window.addEventListener("mousedown", (e) => draw = true);
+window.addEventListener("mouseup", (e) => draw = false);
+
+window.addEventListener("mousemove", (e) => {
+    
+    if (prevX == null || prevY == null || !draw) {
+        prevX = e.clientX;
+        prevY = e.clientY;
+        return;
+    }
+
+    let currentX = e.clientX;
+    let currentY = e.clientY;
+
+    ctx.beginPath();
+    ctx.moveTo(prevX, prevY);
+    ctx.lineTo(currentX, currentY);
+    ctx.stroke();
+
+    prevX = currentX;
+    prevY = currentY;
+});
